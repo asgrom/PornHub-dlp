@@ -45,25 +45,37 @@ class yt_dlp(QObject):
 
 	# Возвращает словарь описания предварительного процессирования yt-dlp.
 	def dump(self) -> dict:
-		# Получение дампа через вывод yt-dlp.
-		self.__Dump = json.loads(subprocess.getoutput(f"{self.__CurrentDirectory}\\yt-dlp\\yt-dlp --dump-json {self.__Link}"))
+		# Дампирование видео.
+		Result = subprocess.getoutput(f"{self.__CurrentDirectory}/yt-dlp/yt-dlp --dump-json {self.__Link}")
+		
+		# Если нет ошибки дампирования.
+		if Result.startswith("ERROR") == False:
+			print(Result)
+			# Получение дампа через вывод yt-dlp.
+			self.__Dump = json.loads(Result)
 
 		return self.__Dump
 
 	# Запускает выполнение команды.
 	def run(self):
 		# Дампирование видео.
-		self.dump()
-		# Получение имени файла и расширения.
-		Filename = self.__Dump["filename"]
-		# Получение имени загрузившего для сортировки.
-		Uploader = "\\" + self.__Dump["uploader"]
+		Result = self.dump()
+		# Код выполнения.
+		ExitCode = 1
 
-		# Если сортировка отключена, обнулить загрузившего.
-		if self.__SortByUploader == False:
-			Uploader = ""
+		# Если дампирование успешно.
+		if Result != None:
+			# Получение имени файла и расширения.
+			Filename = self.__Dump["filename"]
+			# Получение имени загрузившего для сортировки.
+			Uploader = "/" + self.__Dump["uploader"]
 
-		# Выполнение команды.
-		ExitCode = os.system(f"{self.__CurrentDirectory}\\yt-dlp\\yt-dlp -f \"bv*[height<={self.__Cuality}]+ba/b[height<={self.__Cuality}]\" -o \"{self.__SaveDirectory}{Uploader}\\{Filename}\" {self.__Link}")
+			# Если сортировка отключена, обнулить загрузившего.
+			if self.__SortByUploader == False:
+				Uploader = ""
+
+			# Выполнение команды.
+			ExitCode = os.system(f"{self.__CurrentDirectory}/yt-dlp/yt-dlp -f \"bv*[height<={self.__Cuality}]+ba/b[height<={self.__Cuality}]\" -o \"{self.__SaveDirectory}{Uploader}/{Filename}\" {self.__Link}")
+		
 		# Генерация сигнала с завершающим кодом приложения.
 		self.finished.emit(ExitCode)

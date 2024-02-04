@@ -51,11 +51,6 @@ class MainWindow(QMainWindow):
 	# >>>>> ОБРАБОТЧИКИ СИГНАЛОВ <<<<< #
 	#==========================================================================================#
 
-	# Изменяет тему оформления.
-	def __ChangeTheme(self):
-		# Установка системного стиля и цветовой схемы.
-		self.__Application.setStyle(QStyleFactory.keys()[self.__Settings["theme"]])
-
 	# Очищает все данные процесса.
 	def __Clear(self):
 		self.Input.clear()
@@ -157,7 +152,7 @@ class MainWindow(QMainWindow):
 		Bufer = self.__Settings.copy()
 
 		# Удаление пути к стандартной папке загрузок.
-		if Bufer["save-directory"] == os.getcwd() + "\\Downloads":
+		if Bufer["save-directory"] == os.getcwd() + "/Downloads":
 			Bufer["save-directory"] = ""
 
 		# Сохранение настройки.
@@ -241,9 +236,9 @@ class MainWindow(QMainWindow):
 		# Создание объекта GUI: ссылка на GitHub.
 		self.Link = QLabel(self)
 		self.Link.linkActivated.connect(self.__OpenGitHub)
-		self.Link.move(1030, 690)
 		self.Link.setText("<a href=\"https://github.com/DUB1401/PornHub-Downloader\">GitHub</a>")
 		self.Link.adjustSize()
+		self.Link.move(1080 - self.Link.size().width() - 10, 690)
 
 		# Создание объекта GUI: поле псевдоконсольного вывода.
 		self.Output = QTextEdit(self)
@@ -297,20 +292,6 @@ class MainWindow(QMainWindow):
 		CualitySelecter.resize(180, 40)
 		CualitySelecter.setToolTip(CURRENT_LOCALE[9])
 
-		# Создание объекта GUI: заголовок выбора темы.
-		ThemeTitle = QLabel(self)
-		ThemeTitle.setText(f"{CURRENT_LOCALE[10]}:")
-		ThemeTitle.adjustSize()
-
-		# Создание объекта GUI: селектор темы.
-		ThemeSelecter = QComboBox(self)
-		ThemeSelecter.addItems(QStyleFactory.keys())
-		ThemeSelecter.setCurrentIndex(self.__Settings["theme"])
-		ThemeSelecter.currentIndexChanged.connect(lambda: self.__SaveSetting("theme", ThemeSelecter.currentIndex()))
-		ThemeSelecter.currentIndexChanged.connect(self.__ChangeTheme)
-		ThemeSelecter.resize(180, 20)
-		ThemeSelecter.setToolTip(CURRENT_LOCALE[11])
-
 		# Создание объекта GUI: флаговая кнопка включения сортировки по моделям.
 		SortByModel = QCheckBox(self)
 		SortByModel.clicked.connect(lambda: self.__SaveSetting("sort-by-models", SortByModel.isChecked()))
@@ -322,8 +303,6 @@ class MainWindow(QMainWindow):
 		#---> Добавление объектов GUI в слой.
 		#==========================================================================================#
 		SettingsLayout.addWidget(SortByModel)
-		SettingsLayout.addWidget(ThemeTitle)
-		SettingsLayout.addWidget(ThemeSelecter)
 		SettingsLayout.addWidget(CualityTitle)
 		SettingsLayout.addWidget(CualitySelecter)
 		SettingsLayout.addStretch()
@@ -340,7 +319,7 @@ class MainWindow(QMainWindow):
 			self.Print("<b style=\"color: green;\">Done!</b> (" + self.__FormatExecutionTime(round(float(time.time() - self.__StartTime), 2)) + ")", True)
 
 		else:
-			self.Print("<b style=\"color: red;\">Error!</b> See CMD output for more information.", True)
+			self.Print("<b style=\"color: red;\">Error!</b> See CLI output for more information.", True)
 
 		# Удаление первого в очереди URL.
 		self.Input.setText('\n'.join(self.Input.toPlainText().split('\n')[1:]))

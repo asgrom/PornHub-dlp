@@ -1,3 +1,4 @@
 pyinstaller
+pyperclip
 requests
 pyqt6

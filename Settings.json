@@ -1,8 +1,7 @@
 {
 	"sort-by-models": false,
 	"save-directory": "",
-	"theme": 2,
 	"cuality": 2,
-	"debug": false,
+	"debug": true,
 	"advertisement": "https://xn--80aaalhzvfe9b4a.xn--80asehdb/"
 }
