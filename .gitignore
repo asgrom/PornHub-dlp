@@ -1,8 +1,6 @@
 # Build data.
-pornhub_dl/pornhub_dl.spec
-PornHub Downloader.spec
-pornhub_dl/build
-Build/Release
+Build/Windows/Release
+pornhub-dl.spec
 
 # Visual Studio project files.
 PornHub Downloader.pyproj
@@ -13,8 +11,8 @@ PornHub Downloader.sln
 Downloads.ytdl
 Downloads
 
-# Python cache.
-__pycache__
-
 # Advertisement animation file.
 Advertisement.gif
+
+# Python cache.
+__pycache__

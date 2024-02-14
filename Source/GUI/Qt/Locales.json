@@ -1,0 +1,32 @@
+{
+	"EN": [
+		"Advertisement",
+		"Clear",
+		"Copy output",
+		"Download",
+		"Paste here links to videos",
+		"Output logs",
+		"Paste links",
+		"Settings",
+		"Cuality",
+		"Resolution of the downloaded video.",
+		"Theme",
+		"Style of the program window.",
+		"Sort by models"
+	],
+	"RU": [
+		"Реклама",
+		"Очистить",
+		"Копировать логи",
+		"Скачать",
+		"Вставьте сюда ссылки на видео",
+		"Логи",
+		"Вставить ссылки",
+		"Настройки",
+		"Качество",
+		"Разрешение загружаемого видео.",
+		"Тема",
+		"Стиль окна программы.",
+		"По моделям"
+	]
+}
