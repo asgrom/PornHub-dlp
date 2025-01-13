@@ -1,18 +1,13 @@
+# Python cache and virtual enviroment.
+__pycache__
+.venv
 # Build data.
 Build/Windows/Release
-pornhub-dl.spec
-
-# Visual Studio project files.
-PornHub Downloader.pyproj
-PornHub Downloader.sln
-.vs
-
+pornhub-dlp.spec
 # Downloaded videos and it's data.
 Downloads.ytdl
 Downloads
-
 # Advertisement animation file.
 Advertisement.gif
-
-# Python cache.
-__pycache__
+# Libs.
+yt-dlp

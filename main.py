@@ -1,72 +1,39 @@
-from dublib.Methods import CheckPythonMinimalVersion, ReadJSON
-from dublib.Terminalyzer import Command, Terminalyzer
-from Source.Window import Window, Toolkits
+from Source.Core.Application import Application, Interfaces
 
-import ctypes
-import json
-import sys
-import os
+from dublib.Methods.System import CheckPythonMinimalVersion
+from dublib.CLI.Terminalyzer import Command, Terminalyzer
+from dublib.Methods.Filesystem import ReadJSON
+from dublib.Engine.GetText import GetText
 
 #==========================================================================================#
-# >>>>> ИНИЦИАЛИЗАЦИЯ СКРИПТА <<<<< #
+# >>>>> ИНИЦИАЛИЗАЦИЯ <<<<< #
 #==========================================================================================#
 
-# Проверка минимальной требуемой версии.
 CheckPythonMinimalVersion(3, 10)
-# Словарь важных значений.
-VARIABLES = {
-	"version": "1.4.0",
-	"copyright": "Copyright © 2023-2024. DUB1401."
-}
-
-#==========================================================================================#
-# >>>>> ЧТЕНИЕ НАСТРОЕК <<<<< #
-#==========================================================================================#
-
-# Чтение настроек.
+GetText.initialize("PornHub-dlp", "ru", "Locales")
 Settings = ReadJSON("Settings.json")
-
-# Если директория для загрузки не указана.
-if Settings["downloads-directory"] == "":
-	# Формирование пути.
-	Settings["downloads-directory"] = os.getcwd() + "/Downloads"
-	# Если стандартной папки не существует, создать.
-	if os.path.exists("Downloads") == False: os.makedirs("Downloads")
+WindowObject = Application(Settings)
 
 #==========================================================================================#
-# >>>>> НАСТРОЙКА ОБРАБОТЧИКА КОМАНД <<<<< #
+# >>>>> ГЕНЕРАЦИЯ ОПИСАНИЙ КОМАНД <<<<< #
 #==========================================================================================#
 
-# Список описаний обрабатываемых команд.
 CommandsList = list()
+Com = Command("run", "Run application.")
+ComPos = Com.create_position("MODE", "Mode of launching.")
+ComPos.add_flag("qt", "PyQt6 mode.")
+ComPos.add_flag("gtk", "GTK4 mode.")
+ComPos.add_flag("live", "Live CLI mode.")
+CommandsList.append(Com)
 
-# Создание команды: run.
-COM_run = Command("run")
-COM_run.add_flag_position(["qt", "gtk"])
-CommandsList.append(COM_run)
-
-# Инициализация обработчика консольных аргументов.
-CAC = Terminalyzer()
-# Получение информации о проверке команд. 
-CommandDataStruct = CAC.check_commands(CommandsList)
+Analyzer = Terminalyzer()
+Analyzer.enable_help()
+ParsedCommand = Analyzer.check_commands(CommandsList)
 
 #==========================================================================================#
 # >>>>> ОБРАБОТКА КОМАНД <<<<< #
 #==========================================================================================#
 
-# Запуск стандартного окна.
-WindowObject = Window(VARIABLES, Settings)
-# Стандартная графическая библиотека.
-Toolkit = Toolkits.Qt
-
-# Обработка отсутствия команды.
-if CommandDataStruct == None:
-	# Запуск стандартного окна.
-	WindowObject.show(Toolkit)
-
-# Обработка команды: run
-if CommandDataStruct.name == "run":
-	# Если указана GTK, выполнить запуск с её использованием.
-	if "gtk" in CommandDataStruct.flags: Toolkit = Toolkits.GTK
-	# Запуск окна.
-	WindowObject.show(Toolkit)
+if not ParsedCommand: WindowObject.run(Interfaces.Qt)
+elif ParsedCommand.check_flag("live"): WindowObject.run(Interfaces.LiveCLI)
+elif ParsedCommand.check_flag("qt"): WindowObject.run(Interfaces.Qt)

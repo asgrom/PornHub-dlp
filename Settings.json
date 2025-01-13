@@ -1,7 +1,6 @@
 {
-	"sort-by-models": false,
-	"downloads-directory": "",
-	"cuality": 5,
-	"debug": false,
-	"advertisement": "https://xn--80aaalhzvfe9b4a.xn--80asehdb/"
+	"sorting": false,
+	"directory": "",
+	"quality": 2,
+	"advertisement": ""
 }

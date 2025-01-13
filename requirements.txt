@@ -1,4 +1,4 @@
-pyinstaller
+pyinstaller; sys_platform=="win32"
 pyperclip
-requests
+dublib==0.15.3
 pyqt6
