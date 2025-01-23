@@ -4,13 +4,14 @@ from dublib.Methods.System import CheckPythonMinimalVersion
 from dublib.CLI.Terminalyzer import Command, Terminalyzer
 from dublib.Methods.Filesystem import ReadJSON
 from dublib.Engine.GetText import GetText
+import os
 
 #==========================================================================================#
 # >>>>> ИНИЦИАЛИЗАЦИЯ <<<<< #
 #==========================================================================================#
 
 CheckPythonMinimalVersion(3, 10)
-GetText.initialize("PornHub-dlp", "ru", "Locales")
+GetText.initialize("PornHub-dlp", os.environ["LANG"], "Locales")
 Settings = ReadJSON("Settings.json")
 WindowObject = Application(Settings)
 

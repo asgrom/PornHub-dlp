@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "POT-Creation-Date: 2024-12-28 13:49+0300\n"
-"PO-Revision-Date: 2024-12-28 13:50+0300\n"
+"PO-Revision-Date: 2025-01-14 16:38+0300\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: en\n"
@@ -16,7 +16,7 @@ msgstr ""
 
 #: GUI/Qt/QtWindow.py:133
 msgid "Реклама"
-msgstr ""
+msgstr "Advertisement"
 
 #: GUI/Qt/QtWindow.py:139
 msgid "Очистить"
@@ -24,40 +24,40 @@ msgstr "Clear"
 
 #: GUI/Qt/QtWindow.py:145
 msgid "Копировать вывод"
-msgstr ""
+msgstr "Copy output"
 
 #: GUI/Qt/QtWindow.py:156
 msgid "Скачать"
-msgstr ""
+msgstr "Download"
 
 #: GUI/Qt/QtWindow.py:161
 msgid "Вставьте сюда ссылки на видео"
-msgstr ""
+msgstr "Paste here video links"
 
 #: GUI/Qt/QtWindow.py:174
 msgid "Вывод"
-msgstr ""
+msgstr "Output"
 
 #: GUI/Qt/QtWindow.py:181
 msgid "Вставить ссылки"
-msgstr ""
+msgstr "Paste links"
 
 #: GUI/Qt/QtWindow.py:193
 msgid "Настройки"
-msgstr ""
+msgstr "Settings"
 
 #: GUI/Qt/QtWindow.py:203
 msgid "Качество"
-msgstr ""
+msgstr "Quality"
 
 #: GUI/Qt/QtWindow.py:211
 msgid "Разрешение скачиваемых видео."
-msgstr ""
+msgstr "Downloaded videos resolution."
 
 #: GUI/Qt/QtWindow.py:216
 msgid "По моделям"
-msgstr ""
+msgstr "Sorting"
 
 #: GUI/Qt/QtWindow.py:217
 msgid "Сортировать видео по каталогам в соответствии с авторами."
-msgstr ""
+msgstr "Sort videos by folders according to the authors."
