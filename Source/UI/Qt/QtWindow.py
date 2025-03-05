@@ -75,9 +75,7 @@ class QtWindow(QMainWindow):
 		
 		for Line in FormattedLines:
 			Line = Line.split('&')[0]
-
-			if bool(re.match(r"https:\/\/.{0,4}?pornhub\.com\/view_video\.php\?viewkey=\S+\b", Line)) == True:
-				ResultLines.append(Line)
+			if bool(re.match(r"https:\/\/(?:\w{0,4}\.)?pornhub\.(org|com)\/view_video\.php\?viewkey=\w+", Line)): ResultLines.append(Line)
 
 		ResultText = "\n".join(ResultLines) + "\n"
 
@@ -324,7 +322,7 @@ class QtWindow(QMainWindow):
 		#==========================================================================================#
 
 		self.setFixedSize(1080, 720)
-		self.setWindowTitle("PornHub-dlp v2.0.0")
+		self.setWindowTitle("PornHub-dlp v2.0.1")
 
 		self.__CreateBasicUI()
 		self.__CreateSettingsGroupUI()
