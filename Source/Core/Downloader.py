@@ -43,8 +43,12 @@ class VideoDownloader:
 				with open("yt-dlp/ffprobe.exe", "wb") as FileWriter: FileWriter.write(ZipReader.read("ffmpeg-7.1-essentials_build/bin/ffprobe.exe"))
 				print("ffprobe.exe")
 				print("Done.")
-				os.remove("yt-dlp/ffmpeg-essentials.zip")
-				print("Temporary files removed.")
+
+				try:
+					os.remove("yt-dlp/ffmpeg-essentials.zip")
+					print("Temporary files removed.")
+
+				except: pass
 
 	#==========================================================================================#
 	# >>>>> ПУБЛИЧНЫЕ МЕТОДЫ <<<<< #
